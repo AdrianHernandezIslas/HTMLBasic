@@ -11,6 +11,6 @@ const domMain = (() => {
   
   $button.addEventListener("click",fnCallbackClick);
 
-  $divRoot.appendChild($button);
+  //$divRoot.appendChild($button);
 
 })();
