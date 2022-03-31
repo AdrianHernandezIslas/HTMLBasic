@@ -8,10 +8,8 @@ const domElements = (() => {
     const $tdName = document.createElement("td");
     const $tdDescripcion = document.createElement("td");
     const $tdAcciones = document.createElement("td");
-
-    const $buttonEdit = document.createElement("button");
-    $buttonEdit.innerText = "edit";
-
+    const $buttonEdit = _createButton();
+   
     $tdId.innerText = id;
     $tdName.innerText = name;
     $tdDescripcion.innerText = descripcion;
@@ -24,7 +22,22 @@ const domElements = (() => {
     $tBody.appendChild($tr);
   };
 
-  _createRow(1, "Cangrejo","Tacaño");
-  _createRow(2, "Patricio","Divertido");
-  _createRow(3, "Arenita","Fuerte");
+  const _createButton = () => {
+    const $buttonEdit = document.createElement("button");
+    $buttonEdit.innerText = "delete";
+
+    $buttonEdit.addEventListener("click",(event) => {
+      const $tdParent = event.target.parentElement;
+      const $trParent = $tdParent.parentElement;
+      console.log($trParent.children[0].innerText);
+      const $inputId = document.getElementById("id");
+      $inputId.value = $trParent.children[0].innerText;
+      //$tBody.removeChild($trParent);
+    });
+    return $buttonEdit;
+  }
+
+ return{
+  createRow:_createRow
+ }
 })();
