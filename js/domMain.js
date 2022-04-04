@@ -16,6 +16,22 @@ const domMain = (() => {
   
   $button.addEventListener("click",fnCallbackClick);
 
+
+  const fnExito = (response) => {
+    for (let index = 0; index < response.length; index++) {
+        const id = response[index]['id'];
+        const name = response[index]['name'];
+        domElements.createRow(id,name,'');
+      
+    }
+  };
+
+  const fnFallo = () => {
+
+  };
+
+  clientHttp.get("https://jsonplaceholder.typicode.com/users",fnExito,fnFallo);
+
   //$divRoot.appendChild($button);
 
 })();

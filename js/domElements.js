@@ -24,12 +24,12 @@ const domElements = (() => {
 
   const _createButton = () => {
     const $buttonEdit = document.createElement("button");
-    $buttonEdit.innerText = "delete";
+    $buttonEdit.innerText = "edit";
 
     $buttonEdit.addEventListener("click",(event) => {
       const $tdParent = event.target.parentElement;
       const $trParent = $tdParent.parentElement;
-      console.log($trParent.children[0].innerText);
+
       const $inputId = document.getElementById("id");
       $inputId.value = $trParent.children[0].innerText;
       //$tBody.removeChild($trParent);
