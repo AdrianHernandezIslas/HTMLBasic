@@ -11,26 +11,38 @@ const domMain = (() => {
     const id = $inputId.value;
     const name = $inputName.value;
     const description = $inputDescription.value;
-    domElements.createRow(id,name,description);
+    clientHttp.post("https://dsos-test.herokuapp.com/api/compras/comprar/",{
+      costoTotal: id ,
+      idCliente:name ,
+      idProducto:description
+      },fnExito,fnFallo);
   };
   
   $button.addEventListener("click",fnCallbackClick);
 
 
   const fnExito = (response) => {
-    for (let index = 0; index < response.length; index++) {
-        const id = response[index]['id'];
-        const name = response[index]['name'];
-        domElements.createRow(id,name,'');
-      
+    const httpResponse = response.httpCode;
+    if(httpResponse >= 200 && httpResponse <= 299){
+      const id = $inputId.value;
+      const name = $inputName.value;
+      const description = $inputDescription.value;
+      domElements.createRow(id,name,description);
+    }else{
+      alert(response);
     }
   };
 
-  const fnFallo = () => {
-
+  const fnFallo = (err) => {
+    console.error(err);
   };
 
-  clientHttp.get("https://jsonplaceholder.typicode.com/users",fnExito,fnFallo);
+  //clientHttp.get("http://localhost:8080/api/v1/cuenta",fnExito,fnFallo);
+  /*clientHttp.post("https://dsos-test.herokuapp.com/api/compras/comprar/",{
+    costoTotal: 34 ,
+    idCliente:1 ,
+    idProducto:1
+    },fnExito,fnFallo);*/
 
   //$divRoot.appendChild($button);
 
