@@ -5,7 +5,7 @@ const clientHttp = (() => {
       .then(fnExito)
       .catch(fnFallo);
   };
-
+  //Llamadas -> Asincronas
   const _post = (url, payload, fnExito, fnFallo) => {
     fetch(url, {
       method: "POST",
@@ -20,8 +20,24 @@ const clientHttp = (() => {
       .catch(fnFallo);
   };
 
+  const _postAsync = async (url, payload) => {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const responseJSON = await response.json();
+
+    return responseJSON;
+  };
+
   return {
     get: _get,
-    post:_post
+    post: _post,
+    postAsync:_postAsync
   };
 })();
